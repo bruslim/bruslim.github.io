@@ -12,9 +12,12 @@ how variables in JavaScript are referenced by closures.
 
 ##The Execution Context
 
-JavaScript organizes calls to functions in __execution contexts__. Each
-call to a function will create a new execution context. Execution contexts can
-be conceptually organized into the following object:
+JavaScript organizes calls to functions in __execution contexts__. The context
+can be treated like a "Stack Frame" in Java or C#, however their lifespan is 
+not dictated by the call stack.
+
+Each call to a function will create a new execution context.
+Execution contexts can be conceptually organized into the following object:
 
 {% highlight js %}
 
@@ -25,6 +28,9 @@ Context = {
 };
 
 {% endhighlight %}
+
+The contexts conceptually live until they are not needed anymore, much
+like all other objects in JavaScript.
 
 ##Example Walk-Through
 
@@ -51,11 +57,18 @@ funcs.forEach(function caller(f) {
 
 console.log(i);
 
+//prints out
+// 0 4
+// 1 4
+// 2 4
+// 3 4
+// Hey I'm Global 'i'
+
 {% endhighlight %}
 
 Now lets iterate through the code.
 
-First the engine creates the Global Context, and identifies all
+First JavaScript (JS) creates the Global Context, and identifies all
 the variables and arguments in the Global Context.
 
 {% highlight js %}
@@ -70,7 +83,7 @@ GlobalContext = {
 
 {% endhighlight %}
 
-Next the engine executes the code.
+Next JS executes the code.
 
 {% highlight js %}
 
@@ -84,7 +97,7 @@ GlobalContext = {
 
 {% endhighlight %}
 
-When the engine encounters the anonymous self-invoking function, which
+When JS encounters the anonymous self-invoking function, which
 I've identified as `augmented`, the engine creates another context.
 
 {% highlight js %}
@@ -98,7 +111,7 @@ augmentedContext = {
 
 {% endhighlight %}
 
-Next we will execute the first iteration of the `for` loop, and update
+Next JS will execute the first iteration of the `for` loop, and update
 the context accordingly.
 
 {% highlight js %}
@@ -112,20 +125,20 @@ augmentedContext = {
 
 {% endhighlight %}
 
-When we are about to `funcs.push(...)` the system will need to resolve `funcs`.
+When JS is about to execute `funcs.push(...)`, JS will need to resolve `funcs`.
 
-JavaScript will first look into the current context for the identifier `funcs`.
+JS will first look into the current context for the identifier `funcs`.
 If it cannot find it, it will look into the parent context.
 
-In our example, the system will find the `funcs` identifier in the `GlobalContext`.
+In our example, JS will find the `funcs` identifier in the `GlobalContext`.
 
 When the system encounters the anonymous functions `actual`; it create a
 new execution context.
 
 {% highlight js %}
 
-actualContext0 = {
-  parent: augmentedContext,
+actualContext0 = {            // I've ended it in 0 
+  parent: augmentedContext,   // for the first iteration
   variables: {
     actual: 0
   }
@@ -133,8 +146,8 @@ actualContext0 = {
 
 {% endhighlight %}
 
-JavaScript will repeat the above process for each iteration of the loop, eventually
-creating the following contexts.
+JavaScript will repeat the above process for each iteration of the loop,
+eventually creating the following contexts.
 
 {% highlight js %}
 
@@ -187,14 +200,14 @@ GlobalContext = {
 {% endhighlight %}
 
 Now the anonymous function `augmented` has finished execution.
-We can continue with the `funcs.forEach(...)`.
+JS can continue with the `funcs.forEach(...)`.
 
-When we iterate through the `funcs` array, we create a new context for 
-each `caller` and the `Function` stored in the array.
+When JS iterates through the `funcs` array, JS will create a new 
+context for each `caller` and the `Function` stored in the array.
 
 Lets go through the first call in detail.
 
-First the system creates the `caller` context.
+First JS creates the `caller` context.
 
 {% highlight js %}
 
@@ -207,7 +220,8 @@ callerContext = {
 
 {% endhighlight %}
 
-Then when we execute `f()`, we create the appropriate `logger` context.
+Then JS will execute the call to `f()`, and JS will create the
+appropriate `logger` context.
 
 {% highlight js %}
 
@@ -217,8 +231,8 @@ loggerContext0 = {
 
 {% endhighlight %}
 
-Now when the we want to execute `console.log(actual, i)` we will need 
-to resolve our identifiers.
+When JS will want to execute `console.log(actual, i)` JS will need 
+to resolve the identifiers.
 
 First lets resolve `console`.
 
@@ -228,25 +242,25 @@ First lets resolve `console`.
 4. No: Does `console` exist in `GlobalContext` (`loggerContext0.parent.parent.parent`)?
 5. Yes!
 
-JavaScript will walk the "scope chain" until it finds the identifier or cannot continue.
+JS will walk the "scope chain" until it finds the identifier or cannot continue.
 If it cannot continue, the identifier will be `undefined`.
 
-Next we will resolve `actual`.
+Next JS will resolve `actual`.
 
 1. Does `actual` exist in `loggerContext0`?
 2. No: Does `actual` exist in `actualContext0`?
 3. Yes! `actual` is `0`
 
-Next we will resolve `i`.
+Then resolve `i`.
 
 1. Does `i` exist in `loggerContext0` (my context)?
 2. No: Does `i` exist in `actualContext0`?
 3. No: Does `i` exist in `augmentedContext`?
 3. Yes! `i` is `4`
 
-Once the `funcs.forEach(...)` finishes. We will execute `console.log(i)`.
+Once the `funcs.forEach(...)` finishes. JS will execute `console.log(i)`.
 
-This will print out `"Hi I'm Global 'i'` because we are in the `GlobalContext`.
+This will print out `"Hi I'm Global 'i'` because JS is in the `GlobalContext`.
 
 -------
 
