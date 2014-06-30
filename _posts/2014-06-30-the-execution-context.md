@@ -89,7 +89,7 @@ Next JS executes the code.
 
 GlobalContext = {
   variables: {
-    i: "Hey I'm Global 'i",
+    i: "Hey I'm Global 'i'",
     funcs: [],
     console: Object
   }
