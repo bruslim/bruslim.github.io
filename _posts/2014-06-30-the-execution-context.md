@@ -35,7 +35,7 @@ We will use the example code below to illustrate the execution context.
 var i = "Hey I'm Global 'i'";
 var funcs = [];
 
-(function agumented() {
+(function augmented() {
   for(var i = 0; i < 4; i++) {
     funcs.push((function actual(actual) {
       return function logger() {
