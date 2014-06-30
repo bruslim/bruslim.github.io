@@ -1,0 +1,21 @@
+# Dependencies
+markdown:         redcarpet
+hlighter:         true
+
+# Permalinks
+permalink:        pretty
+
+# Setup
+title:            Brian Ruslim
+tagline:          fragmented knowlege of the web
+url:              http://www.brianruslim.com
+paginate:         1
+baseurl:          /
+author:
+  name:           Brian Ruslim
+  url:            https://twitter.com/bruslim
+
+# Custom vars
+version:          1.0.0
+github:			  https://github.com/bruslim
+twitter:		  https://twitter.com/bruslim
