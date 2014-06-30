@@ -98,7 +98,7 @@ GlobalContext = {
 {% endhighlight %}
 
 When JS encounters the anonymous self-invoking function, which
-I've identified as `augmented`, the engine creates another context.
+I've identified as `augmented`, JS creates another context.
 
 {% highlight js %}
 
@@ -132,7 +132,7 @@ If it cannot find it, it will look into the parent context.
 
 In our example, JS will find the `funcs` identifier in the `GlobalContext`.
 
-When the system encounters the anonymous functions `actual`; it create a
+When JS encounters the anonymous functions `actual`; it will create a
 new execution context.
 
 {% highlight js %}
