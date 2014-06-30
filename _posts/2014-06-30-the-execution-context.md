@@ -23,8 +23,8 @@ Execution contexts can be conceptually organized into the following object:
 
 Context = {
   parent: Object, // the parent context which created this context
-  variables: {}   // object containing all the variables
-                  // defined in the function
+  variables: {}   // object containing all the variables and
+                  // arguments defined for the function
 };
 
 {% endhighlight %}
