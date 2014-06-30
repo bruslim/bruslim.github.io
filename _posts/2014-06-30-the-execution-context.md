@@ -199,13 +199,19 @@ GlobalContext = {
 
 {% endhighlight %}
 
-Now the anonymous function `augmented` has finished execution.
-JS can continue with the `funcs.forEach(...)`.
+Notice how each context only knows about the variables and arguments
+defined within each function's lexical scope. This allows each 
+context to track the individual identifiers defined within the function,
+and (via the parent context) any identifier defined outside of the function.
 
-When JS iterates through the `funcs` array, JS will create a new 
-context for each `caller` and the `Function` stored in the array.
+##Continuing the Example and Callbacks
 
-Lets go through the first call in detail.
+If we continue with the example, the array of `funcs` is really an
+array of callbacks. When JS iterates through the `funcs` array; JS
+will create a new context for each `caller` and the `Function` 
+stored in the array.
+
+Lets go through the first iteration in detail.
 
 First JS creates the `caller` context.
 
@@ -220,7 +226,7 @@ callerContext = {
 
 {% endhighlight %}
 
-Then JS will execute the call to `f()`, and JS will create the
+Then JS will execute the callback to `f()`, and JS will create the
 appropriate `logger` context.
 
 {% highlight js %}
@@ -258,9 +264,9 @@ Then resolve `i`.
 3. No: Does `i` exist in `augmentedContext`?
 3. Yes! `i` is `4`
 
-Once the `funcs.forEach(...)` finishes. JS will execute `console.log(i)`.
-
-This will print out `"Hi I'm Global 'i'` because JS is in the `GlobalContext`.
+JS will always look up the scope chain for any identifiers not defined 
+within the current context. This allows for closures to work, as variables
+defined in the containing function can still be referenced via the scope chain.
 
 -------
 
