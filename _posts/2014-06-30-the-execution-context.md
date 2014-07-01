@@ -3,7 +3,7 @@ layout: post
 title: The Execution Context
 ---
 
-My time at [HackerSchool](http://hackerschool.com) has allowed me to 
+My time at [Hacker School](http://hackerschool.com) has allowed me to 
 research the inner conceptual workings of JavaScript; allowing me to 
 demystify how identifier (variables) resoltuion works in closures.
 
