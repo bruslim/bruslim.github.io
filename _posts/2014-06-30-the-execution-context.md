@@ -8,16 +8,21 @@ inner conceptual workings of JavaScript, allowing me to demystify how
 closures and callbacks work.
 
 The goal of this post is to allow you to paint a better mental picture of
-how variables in JavaScript are referenced by closures.
+how variables in JavaScript are resolved. Especially if you are coming
+from a more traditional programming language like Java or C#.
 
 ##The Execution Context
 
-JavaScript organizes calls to functions in __execution contexts__. The context
-can be treated like a "Stack Frame" in Java or C#, however their lifespan is 
+JavaScript organizes function calls into __execution contexts__. The contexts
+can be treated like stack frames in Java or C#. However, their lifespan is 
 not dictated by the call stack.
 
-Each call to a function will create a new execution context.
-Execution contexts can be conceptually organized into the following object:
+Unlike stack frames which are destroyed when `popped()` off the 
+execution stack; contexts, can be thought of, as being destroyed when
+they are not reachable by another context and have finished their execution.
+
+JavaScript will create a new execution context for each function call. These 
+can be conceptually represented by the following object:
 
 {% highlight js %}
 
@@ -29,12 +34,13 @@ Context = {
 
 {% endhighlight %}
 
-The contexts conceptually live until they are not needed anymore, much
-like all other objects in JavaScript.
+Contexts are primarily used for identifier (variable name) resolution,
+and are the main reason why closures in JavaScript work they way they do.
 
 ##Example Walk-Through
 
-We will use the example code below to illustrate the execution context.
+We will use the example code below to illustrate the execution contexts,
+via manual code iteration.
 
 {% highlight js %}
 
@@ -66,7 +72,7 @@ console.log(i);
 
 {% endhighlight %}
 
-Now lets iterate through the code.
+### Iterate the Code
 
 First JavaScript (JS) creates the Global Context, and identifies all
 the variables and arguments in the Global Context.
@@ -83,7 +89,7 @@ GlobalContext = {
 
 {% endhighlight %}
 
-Next JS executes the code.
+Next JS activates/executes the code.
 
 {% highlight js %}
 
@@ -97,8 +103,8 @@ GlobalContext = {
 
 {% endhighlight %}
 
-When JS encounters the anonymous self-invoking function, which
-I've identified as `augmented`, JS creates another context.
+When JS encounters the anonymous self-invoking function, 
+`augmented()`, JS creates another context.
 
 {% highlight js %}
 
@@ -123,30 +129,32 @@ augmentedContext = {
   }
 };
 
-{% endhighlight %}
+{% endhighlight %} 
 
-When JS is about to execute `funcs.push(...)`, JS will need to resolve `funcs`.
-
-JS will first look into the current context for the identifier `funcs`.
-If it cannot find it, it will look into the parent context.
-
-In our example, JS will find the `funcs` identifier in the `GlobalContext`.
-
-When JS encounters the anonymous functions `actual`; it will create a
-new execution context.
+Next JS will execute the anonymous function `actual()`. This creates
+a new execution context.
 
 {% highlight js %}
 
 actualContext0 = {            // I've ended it in 0 
   parent: augmentedContext,   // for the first iteration
   variables: {
-    actual: 0
+    actual: 0                 // from arguments
   }
 };
 
 {% endhighlight %}
 
-JavaScript will repeat the above process for each iteration of the loop,
+Next JS will resolve for the identifier `funcs`.
+
+JS will first look into the current context for the identifier `funcs`.
+If it cannot find the identifier, it will switch to the parent context,
+and repeat its search.
+
+In our example, JS will find `funcs` in the `GlobalContext`; and `funcs`
+will refer to that instance.
+
+JS will repeat the above process for each iteration of the loop,
 eventually creating the following contexts.
 
 {% highlight js %}
@@ -174,7 +182,8 @@ actualContext3 = {
 
 {% endhighlight %}
 
-At the end of the `for` loop...
+At the end of the `for` loop, the `augmentedContext` and `GlobalContext`
+looks like the following.
 
 {% highlight js %}
 
@@ -226,7 +235,7 @@ callerContext = {
 
 {% endhighlight %}
 
-Then JS will execute the callback to `f()`, and JS will create the
+Then JS will execute the callback to `f()`, creating the
 appropriate `logger` context.
 
 {% highlight js %}
@@ -237,10 +246,10 @@ loggerContext0 = {
 
 {% endhighlight %}
 
-When JS will want to execute `console.log(actual, i)` JS will need 
+When JS executes `console.log(actual, i)`, JS will need 
 to resolve the identifiers.
 
-First lets resolve `console`.
+First JS resolves `console`.
 
 1. Does `console` exist in `loggerContext0` (my context)?
 2. No: Does `console` exist in `actualContext0` (`loggerContext0.parent`)?
@@ -249,7 +258,9 @@ First lets resolve `console`.
 5. Yes!
 
 JS will walk the "scope chain" until it finds the identifier or cannot continue.
-If it cannot continue, the identifier will be `undefined`.
+If it cannot continue, the identifier will be `undefined`. This will
+throw an error in older IE versions, as `console` does not exist unless the 
+debugger window is open.
 
 Next JS will resolve `actual`.
 
@@ -267,6 +278,8 @@ Then resolve `i`.
 JS will always look up the scope chain for any identifiers not defined 
 within the current context. This allows for closures to work, as variables
 defined in the containing function can still be referenced via the scope chain.
+
+I hope that clarifies how JS resolves identifiers.
 
 -------
 
