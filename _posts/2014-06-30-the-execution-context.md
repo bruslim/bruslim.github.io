@@ -297,4 +297,4 @@ This post would not have been possible without the following:
 * [David Shariff: What is the Execution Context in JavaScript](http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/)
 * [David Shariff: JavaScript Scope Chain and Closure](http://davidshariff.com/blog/javascript-scope-chain-and-closures/)
 * [StackOverfow: Objects in JavaScript](http://stackoverflow.com/questions/3691125/objects-in-javascript)
-
+* [Ryan Morr: Understanding Scope and Context in JavaScript](http://ryanmorr.com/understanding-scope-and-context-in-javascript/)
