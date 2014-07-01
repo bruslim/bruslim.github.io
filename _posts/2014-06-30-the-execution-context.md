@@ -3,9 +3,9 @@ layout: post
 title: The Execution Context
 ---
 
-My time at [HackerSchool](http://hackerschool.com) has let me dig into the 
-inner conceptual workings of JavaScript, allowing me to demystify how 
-identifier (variables) resoltuion works in closures.
+My time at [HackerSchool](http://hackerschool.com) has allowed me to 
+research the inner conceptual workings of JavaScript; allowing me to 
+demystify how identifier (variables) resoltuion works in closures.
 
 The goal of this post is to allow you to paint a better mental model of
 how identifiers in JavaScript are resolved. Especially if you are coming
@@ -14,12 +14,12 @@ from a more traditional programming language like Java or C#.
 ##The Execution Context
 
 JavaScript organizes function calls into __execution contexts__. The contexts
-can be treated like stack frames in Java or C#. However, their lifespan is 
+can be treated like stack frames in Java or C#; but yet, their lifespan is 
 not dictated by the call stack.
 
 Unlike stack frames which are destroyed when `popped()` off the 
-execution stack; contexts, can be thought of, as being destroyed when
-they are not reachable by another context and have finished their execution.
+execution stack. Contexts, can be thought of, as being destroyed when
+they are not reachable and have finished their execution.
 
 JavaScript will create a new execution context for each function call. These 
 can be conceptually represented by the following object:
@@ -218,7 +218,7 @@ and (via the parent context) any identifier defined outside of the function.
 
 ##Continuing the Example and Callbacks
 
-If we continue with the example, the array of `funcs` is really an
+If we continue with the example, the array of `funcs` is an
 array of callbacks. When JS iterates through the `funcs` array; JS
 will create a new context for each `caller` and the `Function` 
 stored in the array.
