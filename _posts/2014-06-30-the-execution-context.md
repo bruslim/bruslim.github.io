@@ -5,10 +5,10 @@ title: The Execution Context
 
 My time at [HackerSchool](http://hackerschool.com) has let me dig into the 
 inner conceptual workings of JavaScript, allowing me to demystify how 
-closures and callbacks work.
+identifier (variables) resoltuion works in closures.
 
-The goal of this post is to allow you to paint a better mental picture of
-how variables in JavaScript are resolved. Especially if you are coming
+The goal of this post is to allow you to paint a better mental model of
+how identifiers in JavaScript are resolved. Especially if you are coming
 from a more traditional programming language like Java or C#.
 
 ##The Execution Context
@@ -34,7 +34,7 @@ Context = {
 
 {% endhighlight %}
 
-Contexts are primarily used for identifier (variable name) resolution,
+Contexts are primarily used for identifier resolution,
 and are the main reason why closures in JavaScript work they way they do.
 
 ##Example Walk-Through
@@ -102,6 +102,9 @@ GlobalContext = {
 };
 
 {% endhighlight %}
+
+*For brevity I'm going to merge the identification and activation steps,
+although they are two separate steps.*
 
 When JS encounters the anonymous self-invoking function, 
 `augmented()`, JS creates another context.
@@ -258,9 +261,10 @@ First JS resolves `console`.
 5. Yes!
 
 JS will walk the "scope chain" until it finds the identifier or cannot continue.
-If it cannot continue, the identifier will be `undefined`. This will
-throw an error in older IE versions, as `console` does not exist unless the 
-debugger window is open.
+If it cannot continue, the identifier will be `undefined`. 
+
+*Note: This will throw an error in older IE versions, as `console` does not exist unless the 
+debugger window is open.*
 
 Next JS will resolve `actual`.
 
