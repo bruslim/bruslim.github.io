@@ -164,6 +164,30 @@ function textify(obj) {
 })();
 
 
+// Output of program:
+// non-strict | this is:  { speak: [Function] }
+// non-strict | this is:  global
+// 1 | this is: global
+// 2 | this is: global
+// 3 | this is: global
+// 4 | this is: global
+// 1 | this is: asdf
+// 2 | this is: asdf
+// 3 | this is: asdf
+// 4 | this is: asdf
+// strict | this is:  { speak: [Function] }
+// strict | this is:  undefined
+// 1 | this is: undefined
+// 2 | this is: undefined
+// 3 | this is: undefined
+// 4 | this is: undefined
+// 1 | this is: asdf
+// 2 | this is: asdf
+// 3 | this is: asdf
+// 4 | this is: asdf
+// strict | Animal says:  woof!
+// strict | Animal says:  bark!
+
 {% endhighlight %}
 
 
