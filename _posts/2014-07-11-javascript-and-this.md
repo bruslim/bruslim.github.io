@@ -59,7 +59,7 @@ Animal.call(dog,"woof");
 
 {% endhighlight %}
 
-The use of `Object.create(Animal.prototype)` is important, as the object as
+The use of `Object.create(Animal.prototype)` is important, as 
 `new` preserves the prototype chain when the constructor is invoked.
 
 ##Callbacks and `this`
