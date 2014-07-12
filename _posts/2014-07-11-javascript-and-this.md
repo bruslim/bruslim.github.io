@@ -39,9 +39,6 @@ this is `window`) when either is `undefined` or `null`.
 
 ##What About `new`
 
-The only exception to the "Easy Way" is when you use the `new` keyword, and use 
-the function as a constructor.
-
 When the `new` keyword is used, the function called acts as a constructor, and
 `this` inside the constructor is a new object.
 
