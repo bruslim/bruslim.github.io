@@ -11,9 +11,9 @@ to use `call()` and `apply()`; and the oddity of `this` in JavaScript.
 The goal of this post is to provide clarity on how JavaScript resolves
 for `this` in JavaScript.
 
-##Easy Way
+##Refactor It
 
-An easy way to understand how `this` gets its value in JavaScript is 
+The best way to understand how `this` gets its value in JavaScript is 
 to mentally refactor every function call in your code to:
 
 {% highlight js %}
