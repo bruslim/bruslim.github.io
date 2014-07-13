@@ -77,9 +77,6 @@ The following example works in nodejs, and highlights the different behaviors of
 {% highlight js %}
 
 function textify(obj) {
-  if (obj === undefined) {
-    return 'undefined';
-  }
   if (obj === global) {
     return 'global';
   }
@@ -140,8 +137,7 @@ function textify(obj) {
   
   // constructor example
   function Animal(sound) {
-    this.sound = sound;
-    
+    this.sound = sound;    
     this.makeLoud();
   }
   Animal.prototype.speak = function() {
