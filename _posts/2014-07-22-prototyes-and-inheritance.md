@@ -13,7 +13,7 @@ In JavaScript you can create a `Class` by creating an identifier
 
 The goal of this post is to show you how to create reusable
 libraries in JavaScript and how to use prototypical inheritance 
-to create classes
+to create classes.
 
 ##The Animal Example (a JavaScript class)
 
@@ -138,14 +138,15 @@ dog.speak = function() {
 This behavior is how prototypical inheritance works in JavaScript.
 
 JavaScript will look for the *closest* instance of the property name
-when resolving for it. First look into `this`(`dog`) for `speak`, then
-if it cannot find it in `this`(`dog`), it will into `this.prototype`
-(`Animal`), and repeat its search up the prototype chain.
+when resolving for it. First, JavaScript will look into `this`(`dog`) 
+for `speak`, then if it cannot find it in `this`(`dog`), it will into 
+`this.prototype` (`Animal`), and repeat its search up the prototype chain.
 
 ###Lets make Dogs and Cats (inheritnace)
 
 Since we now know how to use prototypes, lets create `Dog` and `Cat`
-classes; and give them default phrases.
+classes; and give them default phrases. Since `Dog` and `Cat` are
+types of `Animal` we will want them to inherit from `Animal`.
 
 {% highlight js %}
 
@@ -168,7 +169,8 @@ Cat.prototype.constructor = Cat;
 {% endhighlight %}
 
 The use of `Animal.call(...)` inside each constructor, allows us
-to use the `Animal` constructor on `this` context.
+to use the `Animal` constructor on `this` context. This is commonly
+known as a `base` call or `super` constructor call.
 
 The following line where we assign `Dog.prototype = Object.create(...)`
 allows us to preserve the prototype chain to `Animal`.
