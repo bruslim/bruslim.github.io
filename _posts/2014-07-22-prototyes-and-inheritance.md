@@ -313,7 +313,7 @@ supress(function() {
   nyan.fetch();
 });
 
-{% highlight %}
+{% endhighlight %}
 
 ####Resources
 
