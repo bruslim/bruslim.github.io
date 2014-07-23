@@ -215,6 +215,105 @@ var badDog = Animal('bad dog', 'woof');
 
 {% endhighlight %}
 
+###The Whole Example
+
+Try out the following code (preferably in nodejs).
+
+{% highlight js %}
+
+/*jshint node: true */
+
+'use strict';
+
+// function to log error to console
+function supress(callback) {
+  try {
+    callback.call();
+  }
+  catch (err) {
+    console.log('ERROR',err);
+  }
+}
+
+
+// start of Animal class
+function Animal(name, phrase) {
+  this.name = name;
+  this.phrase = phrase;
+}
+
+Animal.prototype = {
+  speak: function() {
+    console.log(this.phrase);
+  }
+};
+
+Animal.viewName = function(animal) {
+  if (!(animal instanceof Animal)) {
+    console.log('Not an Animal!');
+  } else {
+    console.log('Name:', animal.name);
+  }
+};
+// end of Animal
+
+// start of Dog
+function Dog(name, phrase) {
+  Animal.call(this,name,phrase || 'woof!');
+}
+Dog.prototype = Object.create(Animal.prototype);
+Dog.prototype.constructor = Dog;
+Dog.prototype.fetch = function() {
+  console.log(this.name + ' fetched a stick!');
+};
+// end of Dog
+
+// start of Cat
+function Cat(name, phrase) {
+  Animal.call(this,name,phrase || 'nyann');
+}
+Cat.prototype = Object.create(Animal.prototype);
+Cat.prototype.constructor = Cat;
+Cat.prototype.sleep = function() {
+  console.log(this.name + ' sleeps on your keyboard.');
+};
+// end of Cat
+
+// program
+
+var doge = new Dog('doge', 'wow');
+var nyan = new Cat('nyan');
+
+// call speak defined in Animal.prototype
+doge.speak(); // wow
+nyan.speak(); // nyann
+
+// call fetch defined in Dog.prototype
+doge.fetch(); // doge fetched a stick!
+
+// call sleep defined in Cat.prototype
+nyan.sleep(); // nyan sleeps on your keyboard.
+
+// call viewName defined in Animal
+Animal.viewName(doge); // Name: doge
+Animal.viewName(nyan); // Name: nyan
+Animal.viewName({}); // Not an Animal!
+
+// the following cause errors
+supress(function() {
+  doge.viewName(doge);
+});
+supress(function() {
+  nyan.viewName(nyan);
+});
+supress(function() {
+  doge.sleep();
+});
+supress(function() {
+  nyan.fetch();
+});
+
+{% highlight %}
 
 ####Resources
 
