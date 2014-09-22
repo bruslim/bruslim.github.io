@@ -9,7 +9,7 @@ is write a cover letter or email to the company when applying. Most people just
 send a slightly modified version to each company. 
 
 Modifying the letter by hand is error prone. It is trivial task to write a program
-which which could load a template, and apply replacement values consistently. 
+which could load a template, and apply replacement values consistently. 
 
 I wrote my program for node, and used the handlebars template language.
 
