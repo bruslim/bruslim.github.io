@@ -3,7 +3,7 @@ layout: post
 title: Script Your Cover Letter
 ---
 
-I've finished a batch of [HackerSchool](http://hackerschool.com), and started
+I've finished a batch of [Hacker School](http://hackerschool.com), and started
 applying to the companies that they work with. One of the things you should do
 is write a cover letter or email to the company when applying. Most people just
 send a slightly modified version to each company. 
