@@ -32,11 +32,11 @@ the object, such that it had the appropriate methods. Instead of
 relying on the Intelli-sense from Visual Studio, to give the
 developer the information.
 
-I was so frustrated by this, that I used a decompiler to decompile
-their binaries and view their source code - to see if there was
+I was so frustrated by this, that I decompiled their binaries 
+to view their source code structure - to investigate if there was
 a reason for this madness. However, I found that much of the code 
 that returned `object` could be resolved by the use of `generics` 
-and `interfaces`.
+and `interfaces`. 
 
 ###Side Note
 
@@ -45,13 +45,14 @@ Unfortunately, I couldn't really get a good answer out of them.
 However, I got to know the lead architect. He is a nice guy, with
 more than 15 years of professional experience. But that does not
 mean his ways work today in the modern world. He was a micro-manager
-with code, hated branches, and stuck to his old archaic ways. 
+with code, hated branches, and stuck to his old archaic ways. Git
+would have scared him.
 
 He loved deeply nested cases, and pushed his developers to have
-only one `return` in a method. He also didn't understand why we
+only one `return` in a method. He also didn't understand why people
 keep making new programming languages. 
 
-It is quite clear that his leadership, led to the API feeling
+It is quite clear that his leadership led to the API feeling
 old and static. 
 
 So if you ever find yourself under that kind of leadership, do
