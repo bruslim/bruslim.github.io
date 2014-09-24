@@ -41,14 +41,17 @@ and `interfaces`.
 ###Side Note
 
 This made me wonder what was their reasoning behind this madness.
-Unfortunately, I couldn't really get a good answer out of them.
+Unfortunately, I couldn't really get a good answer out of them. Their 
+defense was their need to support .net 2.0 (`Interfaces` have been
+in the framework since 1.0).
+
 However, I got to know the lead architect. He is a nice guy, with
 more than 15 years of professional experience. But that does not
 mean his ways work today in the modern world. He was a micro-manager
 with code, hated branches, and stuck to his old archaic ways. Git
 would have scared him.
 
-He loved deeply nested cases, and pushed his developers to have
+He loved deeply nested blocks of code, and pushed his developers to have
 only one `return` in a method. He also didn't understand why people
 keep making new programming languages. 
 
