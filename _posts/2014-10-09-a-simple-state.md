@@ -4,8 +4,8 @@ title: A Simple State Machine
 ---
 
 I had to implement a game recently, and I knew that I had to track
-what state an object in the game was. A perfect fit for this is a 
-state machine. 
+the valid states of an object in the game, and its current state. 
+A perfect fit for this is a state machine. 
 
 A state machine knows all the valid states for an object, and 
 knows of the events which are valid for each state. These events
@@ -46,7 +46,7 @@ function Stateful(initialState) {
 {% endhighlight %}
 
 The constructor first initializes some special variables, the most
-important is the `_eventQueue`, and triggers the `_onEnter` event
+important is the `_eventQueue`. It also triggers the `_onEnter` event
 for the `currentState`.
 
 Triggering the `_onEnter` event is important, since this event is 
@@ -86,9 +86,9 @@ Stateful.prototype.processEventQueue = function() {
 {% endhighlight %}
 
 The callback passed into `setTimeout` will dequeue the
-anonymous function from `_eventQueue` and invoke it, and
-it will make another call to `setTimeout` to process the
-rest of the `_eventQueue` if required.
+anonymous function from `_eventQueue` and invoke it. It will also
+make another call to `setTimeout` to process the rest of the
+`_eventQueue` if required.
 
 The most important part of the state machine is what happens
 in the event handler. Typically the event handler is responsible
@@ -117,7 +117,7 @@ It is important to note that both `_onExit` and `_onEnter` have
 been queued for execution, and are not guaranteed to execute
 immediately. 
 
-A typical state-event collection looks like the following.
+A typical states-events collection looks like the following.
 
 {% highlight js %}
 
