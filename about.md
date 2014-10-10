@@ -3,11 +3,6 @@ layout: page
 title: About
 ---
 
-Self-proclaimed fragmented stack web developer. 
+I'm a Hacker School Alum (June S'14) and a JavaScript hacker. 
 
-With strong instrests in:
-
-* [ServiceStack.net](http://servicestack.net)
-* [Ember.js](http://emberjs.com)
-* [NodeJS](http://nodejs.org)
-
+I honed my craft using C#, T-SQL, and the asp.net web stack.
