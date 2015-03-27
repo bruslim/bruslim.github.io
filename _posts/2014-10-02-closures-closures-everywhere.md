@@ -3,7 +3,7 @@ layout: post
 title: Closures, Closures Everywhere.
 ---
 
-While I was reviewing some algorithms at [Hacker School](http://hackerschool.com), 
+While I was reviewing some algorithms at [Recurse Center](http://recurse.com), 
 I remembered that I had to implement a BFS-like algorithm for some project at my
 past job. I remembered that I took advantage of closures in C# to simplify the
 logic. But, I didn't remember what exactly I did or why.
