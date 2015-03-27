@@ -3,7 +3,7 @@ layout: post
 title: JavaScript and this
 ---
 
-During the first week of [Hacker School](http://www.hackerschool.com),
+During the first week of [Recurse Center](http://www.recurse.com),
 I was exploring nodejs and express 4.0. And I wanted to make the route
 configuration less repetitive. This led me to re-familiarizing myself on how
 to use `call()` and `apply()`; and the oddity of `this` in JavaScript.
