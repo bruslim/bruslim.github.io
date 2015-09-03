@@ -72,6 +72,7 @@ class Person {
 ~~~
 
 The same `Person` can be described in JavaScript (ES6)
+
 ~~~ js
 class Person {
   get firstName() { return this._firstName; }
@@ -158,6 +159,7 @@ interface HasDateOfBirth {
 ~~~
 
 In C# it would look like the following:
+
 ~~~ C#
 interface IHasDateOfBirth {
   DateTime DateOfBirth {get; set;}
