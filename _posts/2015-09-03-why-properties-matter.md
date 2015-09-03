@@ -167,7 +167,7 @@ interface IHasDateOfBirth {
 In JavaScript, there is no exact equivalent, however with __properties__
 a mixin can be provided as a "sort of" codified documentation.
 
-~~~ JavaScript
+~~~ js
 // mixin 
 const HasDateOfBirthMixin = {
   get dateOfBirth() { return this._dateOfBirth; },
@@ -178,6 +178,7 @@ const HasDateOfBirthMixin = {
 Now we can create a utility library which can compute ages.
 
 In Java we would create a static class and use the static functions by calling them.
+
 ~~~ Java
 static class AgeUtility {
   static int computeAgeInYears(HasDateOfBirth obj) { 
@@ -219,7 +220,8 @@ a.computeAgeInYears();
 ~~~
 
 In JavaScript we would be testing for the value.
-~~~ js 
+
+~~~ js
 class AgeUtility {
   static computeAgeInYears(obj) {
     if (!(obj.dateOfBirth instanceof Date) { return -1; }
