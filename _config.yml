@@ -8,7 +8,7 @@ permalink:        pretty
 # Setup
 title:            Brian Ruslim
 tagline:          fragmented knowlege of the web
-url:              http://writing.brianruslim.com
+url:              http://bruslim.github.io
 paginate:         1
 baseurl:          /
 author:
