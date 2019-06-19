@@ -12,8 +12,8 @@ url:              http://bruslim.github.io
 paginate:         1
 baseurl:          /
 author:
-name:             Brian Ruslim
-url:              https://twitter.com/bruslim
+  name:           Brian Ruslim
+  url:            https://twitter.com/bruslim
 
 # Custom vars
 version:          1.0.0
