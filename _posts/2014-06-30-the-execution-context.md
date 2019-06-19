@@ -11,7 +11,7 @@ The goal of this post is to allow you to paint a better mental model of
 how identifiers in JavaScript are resolved. Especially if you are coming
 from a more traditional programming language like Java or C#.
 
-##The Execution Context
+## The Execution Context
 
 JavaScript organizes function calls into __execution contexts__. The contexts
 can be treated like stack frames in Java or C#; but yet, their lifespan is 
@@ -24,7 +24,7 @@ they are not reachable and have finished their execution.
 JavaScript will create a new execution context for each function call. These 
 can be conceptually represented by the following object:
 
-{% highlight js %}
+``` js
 
 Context = {
   parent: Object, // the parent context which created this context
@@ -32,17 +32,17 @@ Context = {
                   // arguments defined for the function
 };
 
-{% endhighlight %}
+```
 
 Contexts are primarily used for identifier resolution,
 and are the main reason why closures in JavaScript work they way they do.
 
-##Example Walk-Through
+## Example Walk-Through
 
 We will use the example code below to illustrate the execution contexts,
 via manual code iteration.
 
-{% highlight js %}
+``` js
 
 var i = "Hey I'm Global 'i'";
 var funcs = [];
@@ -70,14 +70,14 @@ console.log(i);
 // 3 4
 // Hey I'm Global 'i'
 
-{% endhighlight %}
+```
 
 ### Iterate the Code
 
 First JavaScript (JS) creates the Global Context, and identifies all
 the variables and arguments in the Global Context.
 
-{% highlight js %}
+``` js
 
 GlobalContext = {
   variables: {
@@ -87,11 +87,11 @@ GlobalContext = {
   }
 };
 
-{% endhighlight %}
+```
 
 Next JS activates/executes the code.
 
-{% highlight js %}
+``` js
 
 GlobalContext = {
   variables: {
@@ -101,7 +101,7 @@ GlobalContext = {
   }
 };
 
-{% endhighlight %}
+```
 
 *For brevity I'm going to merge the identification and activation steps,
 although they are two separate steps.*
@@ -109,7 +109,7 @@ although they are two separate steps.*
 When JS encounters the anonymous self-invoking function, 
 `augmented()`, JS creates another context.
 
-{% highlight js %}
+``` js
 
 augmentedContext = {
   parent: GlobalContext,
@@ -118,12 +118,12 @@ augmentedContext = {
   }
 };
 
-{% endhighlight %}
+```
 
 Next JS will execute the first iteration of the `for` loop, and update
 the context accordingly.
 
-{% highlight js %}
+``` js
 
 augmentedContext = {
   parent: GlobalContext,
@@ -132,12 +132,12 @@ augmentedContext = {
   }
 };
 
-{% endhighlight %} 
+```
 
 Next JS will execute the anonymous function `actual()`. This creates
 a new execution context.
 
-{% highlight js %}
+``` js
 
 actualContext0 = {            // I've ended it in 0 
   parent: augmentedContext,   // for the first iteration
@@ -146,7 +146,7 @@ actualContext0 = {            // I've ended it in 0
   }
 };
 
-{% endhighlight %}
+```
 
 Next JS will resolve for the identifier `funcs`.
 
@@ -160,7 +160,7 @@ will refer to that instance.
 JS will repeat the above process for each iteration of the loop,
 eventually creating the following contexts.
 
-{% highlight js %}
+``` js
 
 actualContext1 = {
   parent: augmentedContext,
@@ -183,12 +183,12 @@ actualContext3 = {
   }
 };
 
-{% endhighlight %}
+```
 
 At the end of the `for` loop, the `augmentedContext` and `GlobalContext`
 looks like the following.
 
-{% highlight js %}
+``` js
 
 augmentedContext = {
   parent: GlobalContext,
@@ -209,14 +209,14 @@ GlobalContext = {
   }
 },
 
-{% endhighlight %}
+```
 
 Notice how each context only knows about the variables and arguments
 defined within each function's lexical scope. This allows each 
 context to track the individual identifiers defined within the function,
 and (via the parent context) any identifier defined outside of the function.
 
-##Continuing the Example and Callbacks
+## Continuing the Example and Callbacks
 
 If we continue with the example, the array of `funcs` is an
 array of callbacks. When JS iterates through the `funcs` array; JS
@@ -227,7 +227,7 @@ Lets go through the first iteration in detail.
 
 First JS creates the `caller` context.
 
-{% highlight js %}
+``` js
 
 callerContext = {
   parent: GlobalContext,
@@ -236,18 +236,18 @@ callerContext = {
   }
 };
 
-{% endhighlight %}
+```
 
 Then JS will execute the callback to `f()`, creating the
 appropriate `logger` context.
 
-{% highlight js %}
+``` js
 
 loggerContext0 = {
   parent: actualContext0
 };
 
-{% endhighlight %}
+```
 
 When JS executes `console.log(actual, i)`, JS will need 
 to resolve the identifiers.
@@ -291,7 +291,7 @@ There are some details which I've left out, please check the resources
 below for more information.
 
 
-####Resources
+#### Resources
 This post would not have been possible without the following:
 
 * [David Shariff: What is the Execution Context in JavaScript](http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/)
