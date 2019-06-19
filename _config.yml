@@ -1,5 +1,5 @@
 # Dependencies
-markdown:         redcarpet
+markdown:         kramdown
 hlighter:         true
 
 # Permalinks
@@ -12,11 +12,11 @@ url:              http://bruslim.github.io
 paginate:         1
 baseurl:          /
 author:
-  name:           Brian Ruslim
-  url:            https://twitter.com/bruslim
+name:             Brian Ruslim
+url:              https://twitter.com/bruslim
 
 # Custom vars
 version:          1.0.0
-github:			  https://github.com/bruslim
-twitter:		  https://twitter.com/bruslim
-instagram:		  https://instagram.com/bruslim
+github:			      https://github.com/bruslim
+twitter:		      https://twitter.com/bruslim
+instagram:		    https://instagram.com/bruslim
